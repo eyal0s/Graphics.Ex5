@@ -19,48 +19,46 @@ public class Cube implements IRenderable {
 		gl.glDisable(2896);
 		gl.glBegin(7);
 
-		//Front - Red
-	    gl.glColor3f(1.0f, 0.0f, 0.0f);
-	    gl.glVertex3f( 0.5f,  0.5f, - 0.5f);	   
-	    gl.glVertex3f( 0.5f, - 0.5f, - 0.5f);
-	    gl.glVertex3f(- 0.5f, - 0.5f, - 0.5f);
-	    gl.glVertex3f(- 0.5f,  0.5f, - 0.5f);
+
+		// painting the cube with various colors
+
+		double currentSideOffset = 0.3;
 		
-	    // Back side - Yellow  
-	    gl.glColor3f(1.0f,  1.0f, 0.0f);
-		gl.glVertex3f(  0.5f, -0.5f, 0.5f );
-		gl.glVertex3f( 0.5f,  0.5f, 0.5f );
-		gl.glVertex3f( -0.5f,  0.5f, 0.5f );
-		gl.glVertex3f( -0.5f, -0.5f, 0.5f );
-		   
-		// Right side - Purple
-		gl.glColor3f(  1.0f,  0.0f,  1.0f );
-		gl.glVertex3f( 0.5f, -0.5f, -0.5f );
-		gl.glVertex3f( 0.5f,  0.5f, -0.5f );
-		gl.glVertex3f( 0.5f,  0.5f,  0.5f );
-		gl.glVertex3f( 0.5f, -0.5f,  0.5f );
-		   
-		// Left side - Green
-		gl.glColor3f(   0.0f,  1.0f,  0.0f );
-		gl.glVertex3f( -0.5f, -0.5f,  0.5f);
-		gl.glVertex3f( -0.5f,  0.5f,  0.5f );
-		gl.glVertex3f( -0.5f,  0.5f, -0.5f );
-		gl.glVertex3f( -0.5f, -0.5f, -0.5f );
-		   
-		// Top side - Blue
-		gl.glColor3f(   0.0f,  0.0f,  1.0f );
-		gl.glVertex3f(  0.5f,  0.5f,  0.5f );
-		gl.glVertex3f(  0.5f,  0.5f, -0.5f );
-		gl.glVertex3f( -0.5f,  0.5f, -0.5f );
-		gl.glVertex3f( -0.5f,  0.5f,  0.5f );
-		 
-		   
-		// Bottom side - Black
-		gl.glColor3f( 0.0f,  0.0f,  0.0f );
-		gl.glVertex3f(  0.5f, -0.5f, -0.5f );
-		gl.glVertex3f(  0.5f, -0.5f,  0.5f );
-		gl.glVertex3f( -0.5f, -0.5f,  0.5f );
-		gl.glVertex3f( -0.5f, -0.5f, -0.5f );
+		gl.glColor3d(1,0,1);
+		gl.glVertex3d(-currentSideOffset,-currentSideOffset,+currentSideOffset);	
+		gl.glVertex3d(+currentSideOffset,-currentSideOffset,+currentSideOffset);	
+		gl.glVertex3d(+currentSideOffset,+currentSideOffset,+currentSideOffset);	
+		gl.glVertex3d(-currentSideOffset,+currentSideOffset,+currentSideOffset);
+		
+		gl.glColor3d(1,1,0);
+		gl.glVertex3d(+currentSideOffset,-currentSideOffset,+currentSideOffset);		
+		gl.glVertex3d(+currentSideOffset,-currentSideOffset,-currentSideOffset);
+		gl.glVertex3d(+currentSideOffset,+currentSideOffset,-currentSideOffset);
+		gl.glVertex3d(+currentSideOffset,+currentSideOffset,+currentSideOffset);
+		
+		gl.glColor3d(0,0,0.5);
+		gl.glVertex3d(-currentSideOffset,-currentSideOffset,-currentSideOffset);
+		gl.glVertex3d(-currentSideOffset,-currentSideOffset,+currentSideOffset);
+		gl.glVertex3d(-currentSideOffset,+currentSideOffset,+currentSideOffset);
+		gl.glVertex3d(-currentSideOffset,+currentSideOffset,-currentSideOffset);
+
+		gl.glColor3d(0.5,0.1,0);
+		gl.glVertex3d(+currentSideOffset,+currentSideOffset,-currentSideOffset);
+		gl.glVertex3d(+currentSideOffset,-currentSideOffset,-currentSideOffset);
+		gl.glVertex3d(-currentSideOffset,-currentSideOffset,-currentSideOffset);
+		gl.glVertex3d(-currentSideOffset,+currentSideOffset,-currentSideOffset);			
+				
+		gl.glColor3d(0.4,1,0);
+		gl.glVertex3d(-currentSideOffset,-currentSideOffset,-currentSideOffset);
+		gl.glVertex3d(+currentSideOffset,-currentSideOffset,-currentSideOffset);
+		gl.glVertex3d(+currentSideOffset,-currentSideOffset,+currentSideOffset);
+		gl.glVertex3d(-currentSideOffset,-currentSideOffset,+currentSideOffset);
+		
+		gl.glColor3d(0,1,0.5);
+		gl.glVertex3d(-currentSideOffset,+currentSideOffset,+currentSideOffset);
+		gl.glVertex3d(+currentSideOffset,+currentSideOffset,+currentSideOffset);
+		gl.glVertex3d(+currentSideOffset,+currentSideOffset,-currentSideOffset);
+		gl.glVertex3d(-currentSideOffset,+currentSideOffset,-currentSideOffset);
 		
 		gl.glEnd();   
 		gl.glFlush();  
@@ -77,7 +75,7 @@ public class Cube implements IRenderable {
 	  public void setCamera(GL gl) {}
 	  
 	  public String toString() {
-	    return "Cube In 3D";
+	    return "Cube";
 	  }
 	}
 
