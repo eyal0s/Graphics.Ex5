@@ -1,7 +1,12 @@
 package ex5.models;
 
+import java.awt.Color;
+import java.util.Dictionary;
+import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Map;
+
 import ex5.models.Planet;
 import ex5.models.PlanetType;
 import javax.media.opengl.GL;
@@ -10,33 +15,39 @@ import javax.media.opengl.glu.GLUquadric;
 
 public class solarSystem  implements IRenderable {
 	
-	private boolean isLight = false;
+	
 	
 	private float[][] lightPosition = {{ 0.0F, 1.0F, 0.5F, 1.0F},
 						{ 0.0F, 1.0F, -1.0F, 1.0F},
-						{ 0.0F, -1.0F, 0.5F, 1.0F}};
+						{ 0.0F, -1.0F, 0.5F, -1.0F},
+						{ 0.0F, -1F, -1F, 1F}};
 	
 	private float[][] lightSpecs = {{ 0.8F, 0.8F, 0.8F, 1.0F },
 									{ 1.0F, 0.0F, 0.0F, 1.0F }};
 	
-	private float[][] lightDiff = {{ 0.5F, 0.5F, 0.5F, 1.0F },
+	private float[][] lightDiff = {{ 0.5F, 1F, 0.5F, 1.0F },
 									{ 1.0F, 0.0F, 0.0F, 1.0F }};
 	
+	private float[] blackAsFloatArray = { 0, 0, 0};
+    private float[] whitAsFloatArray = { 1, 1, 1 };
+    private float[] blueAsFloatArray = {0 ,0 ,1};
+    private float[] redAsFloatArray = { 1, 0, 0 };
 	
-	  
-	  public void render(GL gl, boolean bWireFrame, boolean bAxis) {
+    private boolean isLight = false;
+	 
+	  public void render(GL gl, boolean wFrame, boolean isAxis) {
 		  
 	    List<Planet> planets = new ArrayList<Planet>();
 	    GLU glu = new GLU();
 	   
-	    if (bWireFrame) {
+	    if (wFrame) {
 	      gl.glPolygonMode(1032, 6913);
 	    } else {
 	      gl.glPolygonMode(1032, 6914);
 	    }
 	    
 	    setLight(gl, glu);
-	    createPlanets(planets, bWireFrame, bAxis);
+	    PlanetManufacter(planets, wFrame, isAxis);
 
 	    //Render the planets
 	    for (Planet p : planets) {
@@ -45,10 +56,8 @@ public class solarSystem  implements IRenderable {
 	  }
 	  
 	  private void setLight(GL gl, GLU glu) {
-		  
-	    float[] amb = { 0.8F, 0.5F, 0.4F, 1.0F };
-	    
-	    gl.glLightModelfv(2899, amb, 0);
+    
+	    gl.glLightModelfv(2899, new float[]{1.5F, 1.5F, 0.8F, 0.5F}, 0);
 
 	    gl.glLightfv(16384, 4611, lightPosition[0], 0);
 	    gl.glLightfv(16384, 4610, lightSpecs[0], 0);
@@ -69,9 +78,7 @@ public class solarSystem  implements IRenderable {
 	   
 	    if (isLight){
 	    	
-	      float[] blackColor = { 0.0F, 0.0F, 0.0F };
-	      float[] whiteColor = { 1.0F, 1.0F, 1.0F };
-	      float[] red = { 1.0F, 0.0F, 0.0F };
+	     
 	      
 	      glu.gluQuadricDrawStyle(glu.gluNewQuadric(), 100012);
 	      glu.gluQuadricNormals(glu.gluNewQuadric(), 100001);
@@ -80,9 +87,10 @@ public class solarSystem  implements IRenderable {
 	      gl.glPushMatrix();
 	      gl.glTranslated(lightPosition[0][0], lightPosition[0][1], lightPosition[0][2]);
 	      
-	      gl.glMaterialfv(1028, 4608, whiteColor, 0);
-	      gl.glMaterialfv(1028, 4610, blackColor, 0);
-	      gl.glMaterialfv(1028, 4609, blackColor, 0);
+	      gl.glMaterialfv(1028, 4608, whitAsFloatArray, 0);
+	      gl.glMaterialfv(1028, 4610, blackAsFloatArray, 0);
+	      gl.glMaterialfv(1028, 4609, blackAsFloatArray, 0);
+
 	      gl.glMaterialf(1028, 5633, 0.0F);
 	      glu.gluSphere(glu.gluNewQuadric(), 0.05D, 16, 16);
 	      
@@ -91,9 +99,9 @@ public class solarSystem  implements IRenderable {
 	      gl.glPushMatrix();
 	      gl.glTranslated(lightPosition[1][0], lightPosition[1][1], lightPosition[1][2]);
 	      
-	      gl.glMaterialfv(1028, 4608, whiteColor, 0);
-	      gl.glMaterialfv(1028, 4610, blackColor, 0);
-	      gl.glMaterialfv(1028, 4609, blackColor, 0);
+	      gl.glMaterialfv(1028, 4608, whitAsFloatArray, 0);
+	      gl.glMaterialfv(1028, 4610, blackAsFloatArray, 0);
+	      gl.glMaterialfv(1028, 4609, blackAsFloatArray, 0);
 	      gl.glMaterialf(1028, 5633, 0.0F);
 	      glu.gluSphere(glu.gluNewQuadric(), 0.05D, 16, 16);
 	      
@@ -101,31 +109,85 @@ public class solarSystem  implements IRenderable {
 	      gl.glPushMatrix();
 	      gl.glTranslated(lightPosition[2][0], lightPosition[2][1], lightPosition[2][2]);
 	      
-	      gl.glMaterialfv(1028, 4608, red, 0);
-	      gl.glMaterialfv(1028, 4610, blackColor, 0);
-	      gl.glMaterialfv(1028, 4609, blackColor, 0);
+	      gl.glMaterialfv(1028, 4608, redAsFloatArray, 0);
+	      gl.glMaterialfv(1028, 4610, blackAsFloatArray, 0);
+	      gl.glMaterialfv(1028, 4609, blackAsFloatArray, 0);
 	      gl.glMaterialf(1028, 5633, 0.0F);
 	      glu.gluSphere(glu.gluNewQuadric(), 0.05D, 16, 16);
 	      
 	      gl.glPopMatrix();
+	      
+	      
+	      gl.glPushMatrix();
+	      gl.glTranslated(lightPosition[3][0], lightPosition[3][1], lightPosition[3][2]);
+	      
+	      gl.glMaterialfv(1028, 4608, redAsFloatArray, 0);
+	      gl.glMaterialfv(1028, 4610, blackAsFloatArray, 0);
+	      gl.glMaterialfv(1028, 4609, blackAsFloatArray, 0);
+	      gl.glMaterialf(1028, 5633, 0.0F);
+	      glu.gluSphere(glu.gluNewQuadric(), 0.05D, 16, 16);
+	      
+	      gl.glPopMatrix();
+	      
+	      
 	      glu.gluDeleteQuadric(glu.gluNewQuadric());
 	    }
 	  }
 	  
-	  private void createPlanets(List<Planet> planets, boolean bWireFrame, boolean bAxis) {
-	    double sun_loc = 0.1D;
-	    double[] color = { 1.0D, 0.0D, 1.0D };
-	    
-	    planets.add(new Planet(0.0D, 0.0D, PlanetType.SUN, null, color, bWireFrame, 0.0D, sun_loc, bAxis));
-	    planets.add(new Planet(sun_loc * 2.0D, 2.0D, PlanetType.MERCURY, null, color, bWireFrame, 7.0D, sun_loc * 0.1D, bAxis));
-	    planets.add(new Planet(sun_loc * 3.0D, 2.0D, PlanetType.VENUS, null, color , bWireFrame, 3.39D, sun_loc * 0.3D, bAxis));
-	    planets.add(new Planet(sun_loc * 4.0D, 23.45D, PlanetType.EARTH, null, color , bWireFrame, 0.0D, sun_loc * 0.2D, bAxis));
-	    planets.add(new Planet(sun_loc * 5.0D, 24.0D, PlanetType.MARS, null, color , bWireFrame, 1.85D, sun_loc * 0.1D, bAxis));
-	    planets.add(new Planet(sun_loc * 6.0D, 3.1D, PlanetType.JUPITER, null, color , bWireFrame, 1.3D, sun_loc * 0.7D, bAxis));
-	    planets.add(new Planet(sun_loc * 8.0D, 26.7D, PlanetType.SATURN, null,color , bWireFrame, 2.49D, sun_loc * 0.6D, bAxis));
-	    planets.add(new Planet(sun_loc * 9.0D, 97.9D, PlanetType.URANUS, null,color , bWireFrame, 0.77D, sun_loc * 0.4D, bAxis));
-	    planets.add(new Planet(sun_loc * 10.0D, 28.8D, PlanetType.NEPTUNE, null, color, bWireFrame, 1.77D, sun_loc * 0.4D, bAxis));
-	    planets.add(new Planet(sun_loc * 11.0D, 57.5D, PlanetType.PLUTO, null, color, bWireFrame, 17.2D, sun_loc * 0.1D, bAxis));
+	  private double[] colorToDoubleArray(Colors colorToReturn)
+	  {
+		  double[] colorAsDoubleArray = new double[3];
+		 switch (colorToReturn) {
+		case Red:
+			colorAsDoubleArray = new double[]{1 ,0 ,0};
+			break;
+		case Green:
+			colorAsDoubleArray = new double[]{0 ,1 ,0};
+			break;
+		case Blue:
+			colorAsDoubleArray = new double[]{0 ,0 ,1};
+			break;
+		case Cyan:
+			colorAsDoubleArray = new double[]{0 ,1 ,1};
+			break;
+		case Orange:
+			colorAsDoubleArray = new double[]{1 ,0.5D ,0};
+			break;
+		case Purple:
+			colorAsDoubleArray = new double[]{1 ,0 ,1};
+			break;
+		case White:
+			colorAsDoubleArray = new double[]{1 ,1 ,1};
+		case Yellow:
+			colorAsDoubleArray = new double[]{1 ,1 ,0};
+		case GreenYellow:
+			colorAsDoubleArray = new double[]{0.5D ,1 ,0};
+			break;
+		case Black:
+			colorAsDoubleArray = new double[]{0 ,0 ,0};
+			break;
+		default: // white
+			colorAsDoubleArray = new double[]{1 ,1 ,1};
+			break;
+		}
+		 
+		 return colorAsDoubleArray;
+	  }
+	  
+	  
+	  private void PlanetManufacter(List<Planet> solarsPlanet, boolean wFrame, boolean isAxis) {
+	      
+		double sunOffsetLocation = 0.2D;
+	    solarsPlanet.add(new Planet(0.0D, 0.0D, PlanetType.SUN, null, colorToDoubleArray(Colors.Yellow), wFrame, 0.0D, sunOffsetLocation + 0.1D, isAxis));
+	    solarsPlanet.add(new Planet(sunOffsetLocation * 4.0D, 2.0D, PlanetType.MERCURY, null, colorToDoubleArray(Colors.Cyan), wFrame, 7.0D, sunOffsetLocation * 0.1D, isAxis));
+	    solarsPlanet.add(new Planet(sunOffsetLocation * 6.0D, 2.0D, PlanetType.VENUS, null, colorToDoubleArray(Colors.Blue) , wFrame, 3.39D, sunOffsetLocation * 0.3D, isAxis));
+	    solarsPlanet.add(new Planet(sunOffsetLocation * 8.0D, 23.45D, PlanetType.EARTH, null, colorToDoubleArray(Colors.GreenYellow) , wFrame, 0.0D, sunOffsetLocation * 0.4D, isAxis));
+	    solarsPlanet.add(new Planet(sunOffsetLocation * 10.0D, 24.0D, PlanetType.MARS, null, colorToDoubleArray(Colors.Red) , wFrame, 1.85D, sunOffsetLocation * 0.1D, isAxis));
+	    solarsPlanet.add(new Planet(sunOffsetLocation * 12.0D, 3.1D, PlanetType.JUPITER, null, colorToDoubleArray(Colors.Purple) , wFrame, 1.3D, sunOffsetLocation * 1.4D, isAxis));
+	    solarsPlanet.add(new Planet(sunOffsetLocation * 16.0D, 26.7D, PlanetType.SATURN, null,colorToDoubleArray(Colors.Green) , wFrame, 2.49D, sunOffsetLocation * 1.2D, isAxis));
+	    solarsPlanet.add(new Planet(sunOffsetLocation * 18.0D, 97.9D, PlanetType.URANUS, null,colorToDoubleArray(Colors.White) , wFrame, 0.77D, sunOffsetLocation * 0.8D, isAxis));
+	    solarsPlanet.add(new Planet(sunOffsetLocation * 20.0D, 28.8D, PlanetType.NEPTUNE, null, colorToDoubleArray(Colors.Orange), wFrame, 1.77D, sunOffsetLocation * 0.8D, isAxis));
+	    solarsPlanet.add(new Planet(sunOffsetLocation * 22.0D, 57.5D, PlanetType.PLUTO, null, colorToDoubleArray(Colors.Blue), wFrame, 17.2D, sunOffsetLocation * 0.2D, isAxis));
 	  }
 	  
 	  public void init(GL gl) {}
@@ -145,4 +207,20 @@ public class solarSystem  implements IRenderable {
 	  public String toString() {
 	    return "Solar System";
 	  }
+	  
+
+	  public enum Colors{
+		  
+		  Red,
+		  Green,
+		  Blue,
+		  Yellow,
+		  Purple,
+		  Cyan,
+		  White,
+		  Orange, 
+		  GreenYellow,
+		  Black
+	}
+	  
 }
