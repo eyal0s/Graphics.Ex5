@@ -12,7 +12,7 @@ import javax.media.opengl.GL;
 import javax.media.opengl.glu.GLU;
 import javax.media.opengl.glu.GLUquadric;
  
-public class solarSystem  implements IRenderable {
+public class SolarSystem  implements IRenderable {
        
        
        
@@ -28,11 +28,11 @@ public class solarSystem  implements IRenderable {
                                                                         { 1.0F, 0.0F, 0.0F, 1.0F }};
        
         private float[] blackAsFloatArray = { 0, 0, 0};
-    private float[] whitAsFloatArray = { 1, 1, 1 };
-    private float[] blueAsFloatArray = {0 ,0 ,1};
-    private float[] redAsFloatArray = { 1, 0, 0 };
+        private float[] whitAsFloatArray = { 1, 1, 1 };
+        private float[] blueAsFloatArray = {0 ,0 ,1};
+        private float[] redAsFloatArray = { 1, 0, 0 };
        
-    private boolean isLight = false;
+        private boolean isLight = false;
          
           public void render(GL gl, boolean wFrame, boolean isAxis) {
                  
@@ -50,7 +50,7 @@ public class solarSystem  implements IRenderable {
  
             //Render the planets
             for (Planet p : planets) {
-                      p.redering(gl, glu);
+                      p.rendering(gl, glu);
             }
           }
          
