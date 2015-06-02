@@ -251,7 +251,7 @@ public class Planet {
 		glu.gluDisk(planet, r_planet * 1.2D,  r_planet * 1.5D, 16, 16);
 		gl.glPopMatrix();
 	}
-
+	///asdadadadadad
 	private void renderMoon(GL gl, GLU glu, GLUquadric planet){
 		
 		gl.glPushMatrix();
