@@ -91,7 +91,7 @@ public class solarSystem  implements IRenderable {
               gl.glMaterialfv(1028, 4609, blackAsFloatArray, 0);
  
               gl.glMaterialf(1028, 5633, 0.0F);
-              glu.gluSphere(glu.gluNewQuadric(), 0.05D, 50, 50);
+              glu.gluSphere(glu.gluNewQuadric(), 0.05D, 16, 16);
              
               gl.glPopMatrix();
              
@@ -102,7 +102,7 @@ public class solarSystem  implements IRenderable {
               gl.glMaterialfv(1028, 4610, blackAsFloatArray, 0);
               gl.glMaterialfv(1028, 4609, blackAsFloatArray, 0);
               gl.glMaterialf(1028, 5633, 0.0F);
-              glu.gluSphere(glu.gluNewQuadric(), 0.05D, 05, 50);
+              glu.gluSphere(glu.gluNewQuadric(), 0.05D, 16, 16);
              
               gl.glPopMatrix();
               gl.glPushMatrix();
@@ -112,7 +112,7 @@ public class solarSystem  implements IRenderable {
               gl.glMaterialfv(1028, 4610, blackAsFloatArray, 0);
               gl.glMaterialfv(1028, 4609, blackAsFloatArray, 0);
               gl.glMaterialf(1028, 5633, 0.0F);
-              glu.gluSphere(glu.gluNewQuadric(), 0.05D, 50, 50);
+              glu.gluSphere(glu.gluNewQuadric(), 0.05D, 16, 16);
              
               gl.glPopMatrix();
              
@@ -177,16 +177,16 @@ public class solarSystem  implements IRenderable {
           private void PlanetManufacter(List<Planet> solarsPlanet, boolean wFrame, boolean isAxis) {
              
                 double sunOffsetLocation = 0.2D;
-            solarsPlanet.add(new Planet(0.0D, 0.0D, ex5.models.Planet.PlanetType.SUN, null, colorToDoubleArray(Colors.Yellow), wFrame, 0.0D, sunOffsetLocation + 0.1D, isAxis));
-            solarsPlanet.add(new Planet(sunOffsetLocation * 4.0D, 2.0D, ex5.models.Planet.PlanetType.MERCURY, null, colorToDoubleArray(Colors.Cyan), wFrame, 7.0D, sunOffsetLocation * 0.1D, isAxis));
-            solarsPlanet.add(new Planet(sunOffsetLocation * 6.0D, 2.0D, ex5.models.Planet.PlanetType.VENUS, null, colorToDoubleArray(Colors.Blue) , wFrame, 3.39D, sunOffsetLocation * 0.3D, isAxis));
-            solarsPlanet.add(new Planet(sunOffsetLocation * 8.0D, 23.45D, ex5.models.Planet.PlanetType.EARTH, null, colorToDoubleArray(Colors.GreenYellow) , wFrame, 0.0D, sunOffsetLocation * 0.4D, isAxis));
-            solarsPlanet.add(new Planet(sunOffsetLocation * 10.0D, 24.0D, ex5.models.Planet.PlanetType.MARS, null, colorToDoubleArray(Colors.Red) , wFrame, 1.85D, sunOffsetLocation * 0.1D, isAxis));
-            solarsPlanet.add(new Planet(sunOffsetLocation * 12.0D, 3.1D, ex5.models.Planet.PlanetType.JUPITER, null, colorToDoubleArray(Colors.Purple) , wFrame, 1.3D, sunOffsetLocation * 1.4D, isAxis));
-            solarsPlanet.add(new Planet(sunOffsetLocation * 16.0D, 26.7D, ex5.models.Planet.PlanetType.SATURN, null,colorToDoubleArray(Colors.Green) , wFrame, 2.49D, sunOffsetLocation * 1.2D, isAxis));
-            solarsPlanet.add(new Planet(sunOffsetLocation * 18.0D, 97.9D, ex5.models.Planet.PlanetType.URANUS, null,colorToDoubleArray(Colors.White) , wFrame, 0.77D, sunOffsetLocation * 0.8D, isAxis));
-            solarsPlanet.add(new Planet(sunOffsetLocation * 20.0D, 28.8D, ex5.models.Planet.PlanetType.NEPTUNE, null, colorToDoubleArray(Colors.Orange), wFrame, 1.77D, sunOffsetLocation * 0.8D, isAxis));
-            solarsPlanet.add(new Planet(sunOffsetLocation * 22.0D, 57.5D, ex5.models.Planet.PlanetType.PLUTO, null, colorToDoubleArray(Colors.Blue), wFrame, 17.2D, sunOffsetLocation * 0.2D, isAxis));
+            solarsPlanet.add(new Planet(0.0D, 0.0D, PlanetType.SUN, null, colorToDoubleArray(Colors.Yellow), wFrame, 0.0D, sunOffsetLocation + 0.1D, isAxis));
+            solarsPlanet.add(new Planet(sunOffsetLocation * 4.0D, 2.0D, PlanetType.MERCURY, null, colorToDoubleArray(Colors.Cyan), wFrame, 7.0D, sunOffsetLocation * 0.1D, isAxis));
+            solarsPlanet.add(new Planet(sunOffsetLocation * 6.0D, 2.0D, PlanetType.VENUS, null, colorToDoubleArray(Colors.Blue) , wFrame, 3.39D, sunOffsetLocation * 0.3D, isAxis));
+            solarsPlanet.add(new Planet(sunOffsetLocation * 8.0D, 23.45D, PlanetType.EARTH, null, colorToDoubleArray(Colors.GreenYellow) , wFrame, 0.0D, sunOffsetLocation * 0.4D, isAxis));
+            solarsPlanet.add(new Planet(sunOffsetLocation * 10.0D, 24.0D, PlanetType.MARS, null, colorToDoubleArray(Colors.Red) , wFrame, 1.85D, sunOffsetLocation * 0.1D, isAxis));
+            solarsPlanet.add(new Planet(sunOffsetLocation * 12.0D, 3.1D, PlanetType.JUPITER, null, colorToDoubleArray(Colors.Purple) , wFrame, 1.3D, sunOffsetLocation * 1.4D, isAxis));
+            solarsPlanet.add(new Planet(sunOffsetLocation * 16.0D, 26.7D, PlanetType.SATURN, null,colorToDoubleArray(Colors.Green) , wFrame, 2.49D, sunOffsetLocation * 1.2D, isAxis));
+            solarsPlanet.add(new Planet(sunOffsetLocation * 18.0D, 97.9D, PlanetType.URANUS, null,colorToDoubleArray(Colors.White) , wFrame, 0.77D, sunOffsetLocation * 0.8D, isAxis));
+            solarsPlanet.add(new Planet(sunOffsetLocation * 20.0D, 28.8D, PlanetType.NEPTUNE, null, colorToDoubleArray(Colors.Orange), wFrame, 1.77D, sunOffsetLocation * 0.8D, isAxis));
+            solarsPlanet.add(new Planet(sunOffsetLocation * 22.0D, 57.5D, PlanetType.PLUTO, null, colorToDoubleArray(Colors.Blue), wFrame, 17.2D, sunOffsetLocation * 0.2D, isAxis));
           }
          
           public void init(GL gl) {}
