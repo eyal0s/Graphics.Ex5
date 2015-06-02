@@ -15,16 +15,17 @@ import javax.media.opengl.glu.GLUquadric;
 
 public class solarSystem  implements IRenderable {
 	
-	private boolean isLight = false;
+	
 	
 	private float[][] lightPosition = {{ 0.0F, 1.0F, 0.5F, 1.0F},
 						{ 0.0F, 1.0F, -1.0F, 1.0F},
-						{ 0.0F, -1.0F, 0.5F, 1.0F}};
+						{ 0.0F, -1.0F, 0.5F, -1.0F},
+						{ 0.0F, -1F, -1F, 1F}};
 	
 	private float[][] lightSpecs = {{ 0.8F, 0.8F, 0.8F, 1.0F },
 									{ 1.0F, 0.0F, 0.0F, 1.0F }};
 	
-	private float[][] lightDiff = {{ 0.5F, 0.5F, 0.5F, 1.0F },
+	private float[][] lightDiff = {{ 0.5F, 1F, 0.5F, 1.0F },
 									{ 1.0F, 0.0F, 0.0F, 1.0F }};
 	
 	private float[] blackAsFloatArray = { 0, 0, 0};
@@ -32,6 +33,7 @@ public class solarSystem  implements IRenderable {
     private float[] blueAsFloatArray = {0 ,0 ,1};
     private float[] redAsFloatArray = { 1, 0, 0 };
 	
+    private boolean isLight = false;
 	 
 	  public void render(GL gl, boolean wFrame, boolean isAxis) {
 		  
@@ -45,7 +47,7 @@ public class solarSystem  implements IRenderable {
 	    }
 	    
 	    setLight(gl, glu);
-	    createPlanets(planets, wFrame, isAxis);
+	    PlanetManufacter(planets, wFrame, isAxis);
 
 	    //Render the planets
 	    for (Planet p : planets) {
@@ -54,10 +56,8 @@ public class solarSystem  implements IRenderable {
 	  }
 	  
 	  private void setLight(GL gl, GLU glu) {
-		  
-	    float[] amb = { 0.8F, 0.5F, 0.4F, 1.0F };
-	    
-	    gl.glLightModelfv(2899, amb, 0);
+    
+	    gl.glLightModelfv(2899, new float[]{1.5F, 1.5F, 0.8F, 0.5F}, 0);
 
 	    gl.glLightfv(16384, 4611, lightPosition[0], 0);
 	    gl.glLightfv(16384, 4610, lightSpecs[0], 0);
@@ -116,6 +116,20 @@ public class solarSystem  implements IRenderable {
 	      glu.gluSphere(glu.gluNewQuadric(), 0.05D, 16, 16);
 	      
 	      gl.glPopMatrix();
+	      
+	      
+	      gl.glPushMatrix();
+	      gl.glTranslated(lightPosition[3][0], lightPosition[3][1], lightPosition[3][2]);
+	      
+	      gl.glMaterialfv(1028, 4608, redAsFloatArray, 0);
+	      gl.glMaterialfv(1028, 4610, blackAsFloatArray, 0);
+	      gl.glMaterialfv(1028, 4609, blackAsFloatArray, 0);
+	      gl.glMaterialf(1028, 5633, 0.0F);
+	      glu.gluSphere(glu.gluNewQuadric(), 0.05D, 16, 16);
+	      
+	      gl.glPopMatrix();
+	      
+	      
 	      glu.gluDeleteQuadric(glu.gluNewQuadric());
 	    }
 	  }
@@ -161,7 +175,7 @@ public class solarSystem  implements IRenderable {
 	  }
 	  
 	  
-	  private void createPlanets(List<Planet> solarsPlanet, boolean wFrame, boolean isAxis) {
+	  private void PlanetManufacter(List<Planet> solarsPlanet, boolean wFrame, boolean isAxis) {
 	      
 		double sunOffsetLocation = 0.2D;
 	    solarsPlanet.add(new Planet(0.0D, 0.0D, PlanetType.SUN, null, colorToDoubleArray(Colors.Yellow), wFrame, 0.0D, sunOffsetLocation + 0.1D, isAxis));
