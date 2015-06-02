@@ -1,6 +1,5 @@
 package ex5.models;
 
-//TODO: me
 import javax.media.opengl.GL;
 import javax.media.opengl.glu.GLU;
 import javax.media.opengl.glu.GLUquadric;
