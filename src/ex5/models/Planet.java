@@ -294,4 +294,9 @@ public class Planet {
                 gl.glEnd();
                 gl.glPopMatrix();
         }
+        
+        public enum PlanetType {
+        	SUN, MERCURY, VENUS, URANUS, NEPTUNE, PLUTO, EARTH, MARS, JUPITER, SATURN;	 
+        }
+
 }
