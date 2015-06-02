@@ -1,5 +1,6 @@
 package ex5.models;
 
+//TODO: me
 import javax.media.opengl.GL;
 import javax.media.opengl.glu.GLU;
 import javax.media.opengl.glu.GLUquadric;
@@ -20,21 +21,21 @@ public class Planet {
 	public Texture texture;
 
 	public Planet(double r_orbit, double axial_tilt, PlanetType type, Texture texture, double[] color, boolean bWireFrame, double incline, double r_planet, boolean bDrawAxis)  {
-		this.r_orbit = r_orbit;
-		this.planet_type = type;
-		this.axial_tilt = axial_tilt;
-		this.texture = texture;
-		this.color = ((double[])color.clone());
-		this.bWireFrame = bWireFrame;
-		this.incline = incline;
-		this.r_planet = r_planet;
-		this.bDrawAxis = bDrawAxis;
-		this.length = (r_planet * 1.5D);
+		r_orbit = r_orbit;
+		planet_type = type;
+		axial_tilt = axial_tilt;
+		ttexture = texture;
+		color = ((double[])color.clone());
+		bWireFrame = bWireFrame;
+		incline = incline;
+		r_planet = r_planet;
+		bDrawAxis = bDrawAxis;
+		length = (r_planet * 1.5D);
 	}
 
 	public void redering(GL gl, GLU glu){
 		//Render orbit to all planets except the sun
-		if (this.planet_type != PlanetType.SUN){
+		if (planet_type != PlanetType.SUN){
 			renderOrbit(gl, glu);
 		}
 		renderPlanet(gl, glu);
@@ -44,34 +45,34 @@ public class Planet {
 		GLUquadric planet = glu.gluNewQuadric();
 		gl.glPushMatrix();
 
-		gl.glRotated(this.incline, 0.0D, 0.0D, 1.0D);
+		gl.glRotated(incline, 0.0D, 0.0D, 1.0D);
 		orbitRotation(gl);
-		gl.glTranslated(this.r_orbit, 0.0D, 0.0D);
+		gl.glTranslated(r_orbit, 0.0D, 0.0D);
 
 		//Place the moon among the earth
-		if (this.planet_type == PlanetType.EARTH)
+		if (planet_type == PlanetType.EARTH)
 		{
 			renderMoon(gl, glu, planet);
 		}
 
-		gl.glRotated(this.axial_tilt, 0.0D, 0.0D, 1.0D);
+		gl.glRotated(axial_tilt, 0.0D, 0.0D, 1.0D);
 
 		//Draw axis
-		if (this.bDrawAxis) {
-			Axis.rendering(gl, this.length);
+		if (bDrawAxis) {
+			Axis.rendering(gl, length);
 		}
 		//Add a ring to Saturn
-		if (this.planet_type == PlanetType.SATURN) {
+		if (planet_type == PlanetType.SATURN) {
 			renderRing(gl, glu, planet);
 		}
 
 		planetMatirial(gl);
-		gl.glColor3d(this.color[0], this.color[1], this.color[2]);
+		gl.glColor3d(color[0], color[1], color[2]);
 
 		glu.gluQuadricDrawStyle(planet, 100012);
 		glu.gluQuadricNormals(planet, 100001);
 		glu.gluQuadricOrientation(planet, 100020);
-		glu.gluSphere(planet, this.r_planet, 16, 16);
+		glu.gluSphere(planet, r_planet, 16, 16);
 
 		glu.gluDeleteQuadric(planet);
 		gl.glPopMatrix();
@@ -79,7 +80,7 @@ public class Planet {
 
 
 	private void orbitRotation(GL gl){
-		switch (this.planet_type){
+		switch (planet_type){
 		case SUN: 
 			gl.glRotated(230.0D, 0.0D, 1.0D, 0.0D);
 			break;
@@ -114,7 +115,7 @@ public class Planet {
 	}
 
 	private void planetMatirial(GL gl) {
-		switch (this.planet_type) {
+		switch (planet_type) {
 
 		case SUN: 
 			float[] amb1 = { 0.0F, 1.0F, 1.0F, 1.0F };
@@ -289,9 +290,14 @@ public class Planet {
 		gl.glMaterialf(1028, 5633, 0.0F);
 		
 		for (int i = 0; i < 361; i++) {
-			gl.glVertex3d(this.r_orbit * Math.sin(i * 3.141592653589793D / 180.0D), 0.0D, r_orbit * Math.cos(i * 3.141592653589793D / 180.0D));
+			gl.glVertex3d(r_orbit * Math.sin(i * 3.141592653589793D / 180.0D), 0.0D, r_orbit * Math.cos(i * 3.141592653589793D / 180.0D));
 		}
 		gl.glEnd();
 		gl.glPopMatrix();
 	}
+	
+	public enum PlanetType {
+		SUN, MERCURY, VENUS, URANUS, NEPTUNE, PLUTO, EARTH, MARS, JUPITER, SATURN;	 
+	}
+
 }
