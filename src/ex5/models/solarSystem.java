@@ -120,7 +120,7 @@ public class solarSystem  implements IRenderable {
               gl.glPushMatrix();
               gl.glTranslated(lightPosition[3][0], lightPosition[3][1], lightPosition[3][2]);
              
-              gl.glMaterialfv(1028, 4608, redAsFloatArray, 0);
+              gl.glMaterialfv(1028, 4608, whitAsFloatArray, 0);
               gl.glMaterialfv(1028, 4610, blackAsFloatArray, 0);
               gl.glMaterialfv(1028, 4609, blackAsFloatArray, 0);
               gl.glMaterialf(1028, 5633, 0.0F);
